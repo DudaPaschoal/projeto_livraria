@@ -4,9 +4,9 @@
 import requests
 from bs4 import BeautifulSoup
 import csv
-import sys # Usado para encerrar o programa se a requisição falhar
+import sys
 
-# FASE 2: Conectando com a Internet
+# FASE 2 Conectando com a Internet
 
 # Exercício 6
 url = "http://books.toscrape.com/"
@@ -20,7 +20,7 @@ else:
     sys.exit() 
 
 
-# FASE 3: A Mágica da Soup4
+# FASE 3
 
 # Exercício 8
 soup = BeautifulSoup(resposta.text, "html.parser")
@@ -33,32 +33,31 @@ livros_html = soup.find_all("article", class_="product_pod")
 print(f"Quantidade de livros encontrados: {len(livros_html)}")
 
 
-# FASE 4: Extração de Dados
+# FASE 4 Extração de Dados
 
 # Exercício 11
 dados_extraidos = []
 
 for livro in livros_html:
-    # Exercício 12: Encontrar o título
+    # Exercício 12 Encontrar o título
   
     titulo = livro.h3.a["title"]
     
-    # Exercício 13: Encontrar o preço
+    # Exercício 13 Encontrar o preço
    
     preco = livro.find("p", class_="price_color").text
     
-    # Exercício 14: Criar dicionário e adicionar à lista
+    # Exercício 14 Criar dicionário e adicionar à lista
     dados_extraidos.append({
         "titulo": titulo,
         "preco": preco
     })
 
-# Imprimindo a lista completa para conferência (Exercício 14)
 print("\nLista de livros extraídos:")
 for item in dados_extraidos:
     print(item)
 
-# FASE 5: Salvando o Relatório (CSV)
+# FASE 5Salvando o Relatório (CSV)
 
 # Exercício 15
 with open("relatorio_livros.csv", "w", newline="", encoding="utf-8") as arquivo_csv:
